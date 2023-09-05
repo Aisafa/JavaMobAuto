@@ -41,7 +41,6 @@ public class Lesson3 {
     public void tearDown() {
         driver.quit();
     }
-
     //Ex2.1 Done
     @Test
     public void testInputHasText() throws InterruptedException {
@@ -56,7 +55,6 @@ public class Lesson3 {
                 "Cannot found input for search element",
                 5);
     }
-
     //Ex2.2 Done
     @Test
     public void testElementHasText() {
@@ -84,7 +82,6 @@ public class Lesson3 {
                 "Java (programming language)",
                 5);
     }
-
     //Ex3. DONE
     @Test
     public void testCancelSearch() {
@@ -119,6 +116,40 @@ public class Lesson3 {
                 "elements still present",
                 5);
     }
+    //Ex4 Done
+    @Test
+    public void testCheckWordsInSearchResults() {
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot found search element",
+                5);
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Java",
+                "Cannot found input for search element",
+                5);
+
+        checkInSearchResult(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+                        "//*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+                "Cannot finds search result",
+                "Java",
+                5);
+
+    }
+
+    private List<WebElement> checkInSearchResult(By by, String error_message, String expected_text, long timeout_seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout_seconds);
+        List adsList = driver.findElements(by);
+        int addListLength = adsList.size();
+        for (int i = 0; i <= addListLength; i++) {
+            wait.withMessage(error_message + "\n");
+            wait.until(ExpectedConditions.textToBe(by, expected_text));
+        }
+        return null;
+    }
 
     private List<WebElement> waitForSeveralElementsPresent(By by, String error_message, int count_element, long timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
@@ -127,7 +158,6 @@ public class Lesson3 {
                 ExpectedConditions.numberOfElementsToBeMoreThan(by, count_element)
         );
     }
-
 
     public Boolean assertElementHasText(By by, String error_message, String expected_text, long timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
