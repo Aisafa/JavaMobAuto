@@ -87,13 +87,13 @@ public class Lesson3 {
     public void testCancelSearch() {
         waitForElementAndClick(
                 By.id("org.wikipedia:id/search_container"),
-                "Not found",
+                "Cannot found search element",
                 5);
 
         waitForElementAndSendKeys(
                 By.xpath("//*[contains(@text,'Search Wikipedia')]"),
                 "Java",
-                "Not found",
+                "Cannot found input field for searching",
                 20);
 
         List<WebElement> search_results = waitForSeveralElementsPresent(
@@ -108,12 +108,12 @@ public class Lesson3 {
 
         waitForElementAndClick(
                 By.id("org.wikipedia:id/search_close_btn"),
-                "close button not found",
+                "Close button not found",
                 3);
 
         waitForElementNotPresent(
                 By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']"),
-                "elements still present",
+                "Elements still present",
                 5);
     }
     //Ex4 Done
