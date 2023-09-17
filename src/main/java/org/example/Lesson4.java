@@ -3,6 +3,7 @@ package org.example;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 public class Lesson4 {
@@ -183,6 +185,31 @@ public class Lesson4 {
                 2);
     }
 
+    @Test
+    public void testAssertTitle() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Not found",
+                3);
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Java",
+                "Not found",
+                20);
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+                        "//*[@text='Object-oriented programming language']"),
+                "Not fund",
+                5);
+
+        elementShouldBeVisible(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']"),
+                "Title not found"
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
         wait.withMessage(error_message + "\n");
@@ -215,5 +242,11 @@ public class Lesson4 {
                 60,
                 "direction",
                 "left"));
+    }
+
+    private void elementShouldBeVisible(By by, String error_message)
+    {
+        driver.findElement(by);
+        ExpectedConditions.presenceOfElementLocated(by);
     }
 }
