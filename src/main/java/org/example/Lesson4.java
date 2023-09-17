@@ -46,7 +46,7 @@ public class Lesson4 {
     }
 
     @Test
-    public void saveTwoArticlesToMyList() {
+    public void testSaveTwoArticlesToMyList() {
 
         waitForElementAndClick(
                 By.xpath("//*[contains(@text,'Search Wikipedia')]"),
