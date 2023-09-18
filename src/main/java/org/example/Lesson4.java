@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -45,6 +46,7 @@ public class Lesson4 {
     @After
     public void tearDown() {
         driver.quit();
+        driver.rotate(ScreenOrientation.PORTRAIT);
     }
 
     @Test
@@ -210,6 +212,49 @@ public class Lesson4 {
         );
     }
 
+    @Test
+    public void testChangeScreenOrientationOnSearchResult() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Not found search line",
+                3);
+
+        String search_line = "Java";
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                search_line,
+                "Not found input for searching",
+                20);
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+                        "//*[@text='Object-oriented programming language']"),
+                "Cannot found article",
+                5);
+
+        String titleBeforeRotation = waitForElementAndGetAttribute(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']//*[@text='Java (programming language)']"),
+                "Text",
+                "Title not found",
+                15
+        );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
+
+        String titleAfterRotation = waitForElementAndGetAttribute(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']//*[@text='Java (programming language)']"),
+                "Text",
+                "Title not found",
+                15
+        );
+
+        Assert.assertEquals(
+                "not equals",
+                titleBeforeRotation,
+                titleAfterRotation
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
         wait.withMessage(error_message + "\n");
@@ -244,9 +289,14 @@ public class Lesson4 {
                 "left"));
     }
 
-    private void elementShouldBeVisible(By by, String error_message)
-    {
+    private void elementShouldBeVisible(By by, String error_message) {
         driver.findElement(by);
         ExpectedConditions.presenceOfElementLocated(by);
+    }
+
+    private String waitForElementAndGetAttribute(By by, String attribute, String error_message, long timeoutInSeconds) {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        return element.getText();
+
     }
 }
