@@ -1,11 +1,6 @@
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
-import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class SearchTests extends CoreTestCase {
     @Test
@@ -51,5 +46,24 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.typeSearchLine(search_line);
         SearchPageObject.waitForEmptyResult();
         SearchPageObject.assertThereIsNotResultOfSearch();
+    }
+
+    //Ex3.
+    @Test
+    public void testCancelSearchSeveralResults() {
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        String search_line = "Java";
+        SearchPageObject.typeSearchLine(search_line);
+
+        int amounts_of_search_result = SearchPageObject.getAmountOfArticle();
+        assertTrue(
+                "we found more than 0 result",
+                amounts_of_search_result > 0);
+
+        SearchPageObject.waitForCancelButtonAndAppear();
+        SearchPageObject.clickCancelSearch();
+        SearchPageObject.waitForSearchResultNotPresent();
     }
 }

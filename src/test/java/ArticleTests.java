@@ -36,4 +36,17 @@ public class ArticleTests extends CoreTestCase {
         ArticlePfeObject.swipeToFooter();
     }
 
+    /*EX:6*/
+    @Test
+    public void testAssertTitle() {
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Java");
+        SearchPageObject.clickByArticleWithSubstring("Java (programming language)");
+
+        ArticlePfeObject ArticlePfeObject = new ArticlePfeObject(driver);
+        String article_title = ArticlePfeObject.getArticleTitle();
+        ArticlePfeObject.elementShouldBeVisible();
+    }
 }

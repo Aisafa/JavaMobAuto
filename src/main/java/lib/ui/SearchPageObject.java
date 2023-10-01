@@ -12,7 +12,8 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/search_results_list']//*[@text='{SUBSTRING}']",
             SEARCH_RESULT_LOCATOR = "//*[@resource-id='org.wikipedia:id/page_list_item_title']",
-            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results']";
+            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results']",
+            SEARCH_ARTICLE_OF_POSITION =  "//android.view.ViewGroup[{POSITION}]";
 
 
     public SearchPageObject(AppiumDriver driver) {
@@ -20,9 +21,12 @@ public class SearchPageObject extends MainPageObject {
     }
 
 
-    private static String getResultSearchElement(String subString) {
+    protected static String getResultSearchElement(String subString) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", subString);
+    }
 
+    private static String getElementPositionFromSearchResult(String position) {
+        return SEARCH_ARTICLE_OF_POSITION.replace("{POSITION}", position);
     }
 
     public void initSearchInput() {
@@ -58,6 +62,11 @@ public class SearchPageObject extends MainPageObject {
     public void clickByArticleWithSubstring(String subString) {
         String search_result_xpath = getResultSearchElement(subString);
         this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + subString, 5);
+    }
+
+    public void clickByArticleOfPosition(String position) {
+        String search_result_xpath = getElementPositionFromSearchResult(position);
+        this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + position, 5);
     }
 
     public int getAmountOfArticle() {

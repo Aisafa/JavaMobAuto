@@ -49,168 +49,169 @@ public class Lesson4 {
         driver.rotate(ScreenOrientation.PORTRAIT);
     }
 
-    @Test
-    public void testSaveTwoArticlesToMyList() {
+/*EX:5*/
+//    @Test
+//    public void testSaveTwoArticlesToMyList() {
+//        waitForElementAndClick(
+//                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+//                "Cannot found search line",
+//                2);
+//
+//        waitForElementAndSendKeys(
+//                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+//                "Java",
+//                "Cannot found search line input field",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//android.view.ViewGroup[2]"),
+//                "Cannon found article search results",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/page_save"),
+//                "Save to list button not found",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/page_save"),
+//                "Save to list button not found",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//*[@text='Add to another reading list']"),
+//                "Cannot found add list button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/create_button"),
+//                "Cannot found create new list",
+//                2);
+//
+//        String name_of_folder = "Learning programming";
+//        waitForElementAndSendKeys(
+//                By.id("org.wikipedia:id/text_input"),
+//                name_of_folder,
+//                "Cannot input field Name ot this list",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("android:id/button1"),
+//                "Cannot 'OK' button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+//                "Cannot close button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//android.view.ViewGroup[3]"),
+//                "Cannon found article search results",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/page_save"),
+//                "Save to list button not found",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/page_save"),
+//                "Save to list button not found",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//*[@text='Add to another reading list']"),
+//                "Cannot found add list button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/item_title'][@text='" + name_of_folder + "']"),
+//                "Cannot find created folder button",
+//                2);
+//
+//
+//        waitForElementAndClick(
+//                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+//                "Cannot close button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/search_close_btn"),
+//                "Not found",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+//                "Cannot close button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/nav_tab_reading_lists"),
+//                "Cannot found saved(my lists) button",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/item_title'][@text='" + name_of_folder + "']"),
+//                "Cannot find created folder button",
+//                2);
+//
+//        waitForElementPresent(
+//                By.id("org.wikipedia:id/page_list_item_container"),
+//                "Cannot my created folder",
+//                2);
+//
+//        swipeElementToLeft(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='JavaScript']"),
+//                "Cannot swipe to left");
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/touch_outside"),
+//                "Cannon found article",
+//                2);
+//
+//        waitForElementPresent(
+//                By.id("org.wikipedia:id/page_list_item_container"),
+//                "Cannot my created folder",
+//                2);
+//
+//        waitForElementAndClick(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][1]"),
+//                "Cannon found article",
+//                2);
+//
+//        waitForElementPresent(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']" +
+//                        "//*[@text='Java (programming language)']"),
+//                "Title not found",
+//                2);
+//    }
 
-        waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Cannot found search line",
-                2);
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Java",
-                "Cannot found search line input field",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//android.view.ViewGroup[2]"),
-                "Cannon found article search results",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/page_save"),
-                "Save to list button not found",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/page_save"),
-                "Save to list button not found",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//*[@text='Add to another reading list']"),
-                "Cannot found add list button",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/create_button"),
-                "Cannot found create new list",
-                2);
-
-        String name_of_folder = "Learning programming";
-        waitForElementAndSendKeys(
-                By.id("org.wikipedia:id/text_input"),
-                name_of_folder,
-                "Cannot input field Name ot this list",
-                2);
-
-        waitForElementAndClick(
-                By.id("android:id/button1"),
-                "Cannot 'OK' button",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-                "Cannot close button",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//android.view.ViewGroup[3]"),
-                "Cannon found article search results",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/page_save"),
-                "Save to list button not found",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/page_save"),
-                "Save to list button not found",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//*[@text='Add to another reading list']"),
-                "Cannot found add list button",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/item_title'][@text='" + name_of_folder + "']"),
-                "Cannot find created folder button",
-                2);
-
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-                "Cannot close button",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Not found",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-                "Cannot close button",
-                2);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/nav_tab_reading_lists"),
-                "Cannot found saved(my lists) button",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/item_title'][@text='" + name_of_folder + "']"),
-                "Cannot find created folder button",
-                2);
-
-        waitForElementPresent(
-                By.id("org.wikipedia:id/page_list_item_container"),
-                "Cannot my created folder",
-                2);
-
-        swipeElementToLeft(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='JavaScript']"),
-                "Cannot swipe to left");
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/touch_outside"),
-                "Cannon found article",
-                2);
-
-        waitForElementPresent(
-                By.id("org.wikipedia:id/page_list_item_container"),
-                "Cannot my created folder",
-                2);
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][1]"),
-                "Cannon found article",
-                2);
-
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']" +
-                        "//*[@text='Java (programming language)']"),
-                "Title not found",
-                2);
-    }
-
-    @Test
-    public void testAssertTitle() {
-        waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Not found",
-                3);
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Java",
-                "Not found",
-                20);
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
-                        "//*[@text='Object-oriented programming language']"),
-                "Not fund",
-                5);
-
-        elementShouldBeVisible(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']"),
-                "Title not found"
-        );
-    }
+/*EX:6*/
+//    @Test
+//    public void testAssertTitle() {
+//        waitForElementAndClick(
+//                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+//                "Not found",
+//                3);
+//
+//        waitForElementAndSendKeys(
+//                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+//                "Java",
+//                "Not found",
+//                20);
+//
+//        waitForElementAndClick(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+//                        "//*[@text='Object-oriented programming language']"),
+//                "Not fund",
+//                5);
+//
+//        elementShouldBeVisible(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/page_contents_container']"),
+//                "Title not found"
+//        );
+//    }
 
     @Test
     public void testChangeScreenOrientationOnSearchResult() {

@@ -86,40 +86,40 @@ public class Lesson3 {
                 "Java (programming language)",
                 5);
     }
-    //Ex3. DONE
-    @Test
-    public void testCancelSearch() {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot found search element",
-                5);
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Java",
-                "Cannot found input field for searching",
-                20);
-
-        List<WebElement> search_results = waitForSeveralElementsPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
-                        "//*[@resource-id='org.wikipedia:id/page_list_item_title']"),
-                "Cannot finds search result",
-                0,
-                4);
-
-        List<WebElement> elements = search_results;
-        Assert.assertNotNull(elements);
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Close button not found",
-                3);
-
-        waitForElementNotPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']"),
-                "Elements still present",
-                5);
-    }
+/*Ex3. DONE*/
+//    @Test
+//    public void testCancelSearch() {
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/search_container"),
+//                "Cannot found search element",
+//                5);
+//
+//        waitForElementAndSendKeys(
+//                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+//                "Java",
+//                "Cannot found input field for searching",
+//                20);
+//
+//        List<WebElement> search_results = waitForSeveralElementsPresent(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+//                        "//*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+//                "Cannot finds search result",
+//                0,
+//                4);
+//
+//        List<WebElement> elements = search_results;
+//        Assert.assertNotNull(elements);
+//
+//        waitForElementAndClick(
+//                By.id("org.wikipedia:id/search_close_btn"),
+//                "Close button not found",
+//                3);
+//
+//        waitForElementNotPresent(
+//                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']"),
+//                "Elements still present",
+//                5);
+//    }
 
     //Ex4 Done
     @Test
@@ -155,14 +155,14 @@ public class Lesson3 {
         }
         return null;
     }
-
-    private List<WebElement> waitForSeveralElementsPresent(By by, String error_message, int count_element, long timeoutSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
-        wait.withMessage(error_message + "\n");
-        return wait.until(
-                ExpectedConditions.numberOfElementsToBeMoreThan(by, count_element)
-        );
-    }
+    //Ex3.
+//    private List<WebElement> waitForSeveralElementsPresent(By by, String error_message, int count_element, long timeoutSeconds) {
+//        WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
+//        wait.withMessage(error_message + "\n");
+//        return wait.until(
+//                ExpectedConditions.numberOfElementsToBeMoreThan(by, count_element)
+//        );
+//    }
 
     public Boolean assertElementHasText(By by, String error_message, String expected_text, long timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
@@ -191,11 +191,11 @@ public class Lesson3 {
         return element;
     }
 
-    private boolean waitForElementNotPresent(By by, String error_message, long timeoutSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
-        wait.withMessage(error_message + "\n");
-        return wait.until(
-                ExpectedConditions.invisibilityOfElementLocated(by)
-        );
-    }
+//    private boolean waitForElementNotPresent(By by, String error_message, long timeoutSeconds) {
+//        WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
+//        wait.withMessage(error_message + "\n");
+//        return wait.until(
+//                ExpectedConditions.invisibilityOfElementLocated(by)
+//        );
+//    }
 }

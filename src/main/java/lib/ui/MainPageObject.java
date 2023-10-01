@@ -20,7 +20,6 @@ public class MainPageObject {
         this.driver = driver;
     }
 
-
     public WebElement waitForElementPresent(By by, String error_message, long timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
         wait.withMessage(error_message + "\n");
@@ -115,10 +114,9 @@ public class MainPageObject {
         }
     }
 
-    public String waitForElementAndGetAttribute(By by, String attribute, String error_message, long timeoutInSeconds) {
-        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
-        return element.getText();
-
+    public void elementShouldBeVisible(By by, String error_message) {
+        driver.findElement(by);
+        ExpectedConditions.presenceOfElementLocated(by);
     }
 
 }

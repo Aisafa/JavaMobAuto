@@ -6,7 +6,8 @@ import org.openqa.selenium.By;
 public class NavigationUI extends MainPageObject {
 
     private static final String
-        MY_LISTS_LINK = "org.wikipedia:id/nav_tab_reading_lists";
+        MY_LISTS_LINK = "org.wikipedia:id/nav_tab_reading_lists",
+        OPTION_OUTSIDE = "org.wikipedia:id/touch_outside";
 
 
     public NavigationUI(AppiumDriver driver) {
@@ -20,4 +21,11 @@ public class NavigationUI extends MainPageObject {
                 5
         );
     }
+
+    public void clickOutside() {
+    waitForElementAndClick(
+            By.id(OPTION_OUTSIDE),
+            "Cannon found article",
+            2);
+}
 }

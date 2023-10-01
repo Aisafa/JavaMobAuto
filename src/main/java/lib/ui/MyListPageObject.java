@@ -11,10 +11,15 @@ public class MyListPageObject extends MainPageObject {
 
     private static final String
             FOLDER_BY_NAME_TPL = "//*[@resource-id='org.wikipedia:id/item_title'][@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE = "org.wikipedia:id/page_list_item_container";
+            ARTICLE_BY_TITLE = "org.wikipedia:id/page_list_item_container",
+            ARTICLE_BY_TITLE_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']";
 
     private static String getFolderXpathByNAme(String name_of_folder) {
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
+    }
+
+    protected static String getResultSearchElement(String subString) {
+        return ARTICLE_BY_TITLE_SUBSTRING_TPL.replace("{SUBSTRING}", subString);
     }
 
     public void openFolderByName(String name_of_folder) {
@@ -24,6 +29,11 @@ public class MyListPageObject extends MainPageObject {
                 "Cannot find created folder button",
                 5
         );
+    }
+
+    public void openSavedArticle(String subString) {
+        String search_result_xpath = getResultSearchElement(subString);
+        this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot  click my saved article " + subString, 5);
     }
 
     public void waitForArticleToAppearByTitle() {
@@ -42,11 +52,10 @@ public class MyListPageObject extends MainPageObject {
         );
     }
 
-    public void swipeByArticleToDelete() {
-        this.swipeElementToLeft(
-                By.id(ARTICLE_BY_TITLE),
-                "Cannot swipe to left"
-        );
+    public void swipeByArticleToDelete(String subString) {
+        String search_result_xpath = getResultSearchElement(subString);
+        this.swipeElementToLeft(By.xpath(search_result_xpath),
+                "Cannot swipe to left");
     }
 
 }
