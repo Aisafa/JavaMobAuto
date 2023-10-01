@@ -18,19 +18,23 @@ import java.util.List;
 public class Lesson3 {
 
     private AppiumDriver driver;
+    private static String AppiumUrl = "http://127.0.0.1:4723";
 
     @Before
     public void setUp() throws Exception {
+
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
+
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "Nexus5");
         capabilities.setCapability("platformVersion", "11.0");
-        capabilities.setCapability("automationName", "Appium");
+        capabilities.setCapability("appium:automationName", "UiAutomator2");
         capabilities.setCapability("appium:appPackage", "org.wikipedia");
         capabilities.setCapability("appium:appActivity", ".main.MainActivity");
         capabilities.setCapability("app", "Users/aisafa/JavaMobAuto/JavaAppiumAuto/apks/org.wikipedia.apk");
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = new AndroidDriver(new URL(AppiumUrl), capabilities);
 
         waitForElementAndClick(By.xpath("//*[contains(@text,'Skip')]"),
                 "Not found",
@@ -116,6 +120,7 @@ public class Lesson3 {
                 "Elements still present",
                 5);
     }
+
     //Ex4 Done
     @Test
     public void testCheckWordsInSearchResults() {
