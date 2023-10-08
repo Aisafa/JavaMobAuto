@@ -13,7 +13,8 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/search_results_list']//*[@text='{SUBSTRING}']",
             SEARCH_RESULT_LOCATOR = "//*[@resource-id='org.wikipedia:id/page_list_item_title']",
             SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results']",
-            SEARCH_ARTICLE_OF_POSITION =  "//android.view.ViewGroup[{POSITION}]";
+            SEARCH_ARTICLE_OF_POSITION =  "//android.view.ViewGroup[{POSITION}]",
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "//*[@resource-id='org.wikipedia:id/search_results_list']//*[@text='{TITLE}' or @text='{DESCRIPTION}']";
 
 
     public SearchPageObject(AppiumDriver driver) {
@@ -27,6 +28,15 @@ public class SearchPageObject extends MainPageObject {
 
     private static String getElementPositionFromSearchResult(String position) {
         return SEARCH_ARTICLE_OF_POSITION.replace("{POSITION}", position);
+    }
+
+    protected static String getTitleAndDescriptionElement(String title, String description) {
+        return SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL.replace("{TITLE}", title).replace("{DESCRIPTION}", description);
+    }
+
+    public void waitForElementByTitleAndDescription (String title, String description) {
+        String search_result_xpath = getTitleAndDescriptionElement(title, description);
+        this.waitForElementPresent(By.xpath(search_result_xpath), "Cannot find search result with title ana description " + title, 5) ;
     }
 
     public void initSearchInput() {
