@@ -2,19 +2,18 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String
-
-            SEARCH_SKIP = "xpath://*[contains(@text,'Skip')]",
-            SEARCH_INIT_ELEMENT = "xpath://*[contains(@text,'Search Wikipedia')]",
-            SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn",
-            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']//*[@text='{SUBSTRING}']",
-            SEARCH_RESULT_LOCATOR = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title']",
-            SEARCH_EMPTY_RESULT_ELEMENT = "xpath://*[@text='No results']",
-            SEARCH_ARTICLE_OF_POSITION =  "xpath://android.view.ViewGroup[{POSITION}]",
-            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']//*[@text='{TITLE}' or @text='{DESCRIPTION}']";
-
+     protected static String
+            SEARCH_SKIP,
+            SEARCH_INIT_ELEMENT,
+            SEARCH_INPUT,
+            SEARCH_CANCEL_BUTTON,
+            SEARCH_RESULT_BY_SUBSTRING_TPL,
+            SEARCH_RESULT_LOCATOR,
+            SEARCH_EMPTY_RESULT_ELEMENT,
+            SEARCH_ARTICLE_OF_POSITION,
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL;
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -60,17 +59,17 @@ public class SearchPageObject extends MainPageObject {
     }
 
     public void typeSearchLine(String search_line) {
-        this.waitForElementAndSendKeys(SEARCH_INIT_ELEMENT, search_line, "cannot find field", 5);
+        this.waitForElementAndSendKeys(SEARCH_INPUT, search_line, "cannot find search field", 5);
     }
 
     public void waitForResult(String subString) {
         String search_result_xpath = getResultSearchElement(subString);
-        this.waitForElementPresent(SEARCH_INIT_ELEMENT, "Cannot find search result with substring " + subString, 5);
+        this.waitForElementPresent(search_result_xpath, "Cannot find search result with substring " + subString, 5);
     }
 
     public void clickByArticleWithSubstring(String subString) {
         String search_result_xpath = getResultSearchElement(subString);
-        this.waitForElementAndClick(SEARCH_INIT_ELEMENT, "Cannot find and click search result with substring " + subString, 5);
+        this.waitForElementAndClick(search_result_xpath, "Cannot find and click search result with substring " + subString, 5);
     }
 
     public void clickByArticleOfPosition(String position) {

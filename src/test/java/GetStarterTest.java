@@ -1,13 +1,16 @@
-package iOS;
-
-import lib.iOSTestCase;
+import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.WelcomePageObject;
 import org.junit.Test;
 
-public class GetStarterTest extends iOSTestCase {
+public class GetStarterTest extends CoreTestCase {
 
     @Test
     public void testPassThroughWelcome() {
+
+        if (Platform.getInstance().isAndroid()) {
+            return;
+        }
 
         WelcomePageObject WelcomePage = new WelcomePageObject(driver);
 
@@ -17,6 +20,5 @@ public class GetStarterTest extends iOSTestCase {
         WelcomePage.clickNext();
         WelcomePage.clickNext();
         WelcomePage.clickGetStartedButton();
-
     }
 }

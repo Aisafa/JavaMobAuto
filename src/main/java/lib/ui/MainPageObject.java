@@ -2,6 +2,7 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -93,19 +94,58 @@ public class MainPageObject {
         }
     }
 
+    public void swipeUpTillElementAppear(String locator, String error_message, int max_swipes) {
+        int already_swiped = 0;
+
+        while (!this.isElementLocatedOnTheScreen(locator)) {
+            if(already_swiped > max_swipes){
+                Assert.assertTrue(error_message, this.isElementLocatedOnTheScreen(locator));
+            }
+            swipeUpQuick();
+            ++already_swiped;
+        }
+    }
+
+    public boolean isElementLocatedOnTheScreen(String locator) {
+        int element_location_by_y = this.waitForElementPresent(locator,
+                        "cannot find by locator",
+                        5)
+                        .getLocation().getY();
+        int screen_size_by_y = driver.manage().window().getSize().getHeight();
+        return element_location_by_y < screen_size_by_y;
+    }
+
+    public void clickElementToDeleteButton(String locator, String error_message, long timeout) {
+       this.waitForElementAndClick(locator, error_message, timeout);
+
+    }
+
     public void swipeElementToLeft(String locator, String error_message) {
         RemoteWebElement carousel = (RemoteWebElement) waitForElementPresent(
                 locator,
                 error_message,
                 15);
+            driver.executeScript("gesture: swipe", Map.of(
+                    "elementId",
+                    carousel.getId(),
+                    "percentage",
+                    60,
+                    "direction",
+                    "left"));
+//        } else {
+//            driver.executeScript("gesture: swipe", Map.of(
+//                    "elementId",
+//                    carousel.getId(),
+//                    "percentage",
+//                    60,
+//                    "direction",
+//                    "left"));
+////            this.waitForElementAndClick(
+////                    DELETE_BUTTON,
+////                    "Cannot find delete bitton",
+////                    5);
+//        }
 
-        driver.executeScript("gesture: swipe", Map.of(
-                "elementId",
-                carousel.getId(),
-                "percentage",
-                60,
-                "direction",
-                "left"));
     }
 
     public int getAmountsElements(String locator) {

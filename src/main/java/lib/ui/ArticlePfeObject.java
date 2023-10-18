@@ -1,20 +1,21 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.openqa.selenium.WebElement;
 
 public class ArticlePfeObject extends MainPageObject {
 
-    private static final String
-            TITLE = "xpath://*[@resource-id='pcs-edit-section-title-description']",
-            FOOTER_ELEMENT = "xpath://*[contains(@text,'View article in browser')]",
-            OPTIONS_BUTTON = "id:org.wikipedia:id/page_save",
-            OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath://*[@text='Add to another reading list']",
-            OPTIONS_CREATE_LIST_BUTTON = "id:org.wikipedia:id/create_button",
-            MY_LIST_NAME_INPUT = "id:org.wikipedia:id/text_input",
-            MY_LIST_OK_BUTTON = "id:android:id/button1",
-            CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
-            CLEAR_ARTICLE_BUTTON = "id:org.wikipedia:id/search_close_btn";
+    protected static String
+            TITLE,
+            FOOTER_ELEMENT,
+            OPTIONS_BUTTON,
+            OPTIONS_ADD_TO_MY_LIST_BUTTON,
+            OPTIONS_CREATE_LIST_BUTTON,
+            MY_LIST_NAME_INPUT,
+            CRATE_MY_LIST_BUTTON,
+            CLOSE_ARTICLE_BUTTON,
+            CLEAR_ARTICLE_BUTTON;
 
     public ArticlePfeObject(AppiumDriver driver) {
         super(driver);
@@ -26,17 +27,28 @@ public class ArticlePfeObject extends MainPageObject {
 
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
-        return title_element.getText();
+        if (Platform.getInstance().isAndroid()) {
+            return title_element.getText();
+        } else {
+            return title_element.getAttribute("name");
+        }
     }
 
     public void swipeToFooter() {
-        this.swipeUpToFindsElement(
-                FOOTER_ELEMENT,
-                "Cannot find and of article",
-                10);
+        if (Platform.getInstance().isAndroid()){
+            this.swipeUpToFindsElement(
+                    FOOTER_ELEMENT,
+                    "Cannot find and of article",
+                    40);
+        } else {
+            this.swipeUpTillElementAppear(
+                    FOOTER_ELEMENT,
+                    "Cannot find and of article",
+                    40);
+        }
     }
 
-    public void addArticleToMyList(String name_of_folder) {
+    public void addArticleToMyListAndroid(String name_of_folder) {
 
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
@@ -65,12 +77,12 @@ public class ArticlePfeObject extends MainPageObject {
                 5);
 
         this.waitForElementAndClick(
-                MY_LIST_OK_BUTTON,
+                CRATE_MY_LIST_BUTTON,
                 "Cannot 'OK' button",
                 5);
     }
 
-    public void closeArticle() {
+    public void closeArticleAndroid() {
         this.waitForElementAndClick(
                 CLOSE_ARTICLE_BUTTON,
                 "Cannot close button",
@@ -85,5 +97,24 @@ public class ArticlePfeObject extends MainPageObject {
                 CLOSE_ARTICLE_BUTTON,
                 "Cannot close button",
                 20);
+    }
+
+    public void addArticleToMyListIOS() {
+        this.waitForElementAndClick(
+                OPTIONS_BUTTON,
+                "Save to list button not found",
+                5);
+    }
+
+    public void closeArticleIOS() {
+        this.waitForElementAndClick(
+                CLOSE_ARTICLE_BUTTON,
+                "Cannot close button",
+                20);
+
+        this.waitForElementAndClick(
+                CLEAR_ARTICLE_BUTTON,
+                "Not found",
+                3);
     }
 }

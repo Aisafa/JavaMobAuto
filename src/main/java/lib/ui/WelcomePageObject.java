@@ -6,10 +6,11 @@ public class WelcomePageObject extends MainPageObject {
 
 
     private static final String
-    STEP_LEARN_MORE_LINK = "id:Свободная энциклопедия",
-    STEP_NEW_WAYS_LINK = "id:Новые способы изучения",
-    NEXT_BUTTON = "name:Далее",
-    START_BUTTON = "name:Начать";
+            STEP_LEARN_MORE_LINK = "id:Свободная энциклопедия",
+            STEP_NEW_WAYS_LINK = "id:Новые способы изучения",
+            NEXT_BUTTON = "name:Далее",
+            SKIP_BUTTON = "name:Пропустить",
+            START_BUTTON = "name:Начать";
 
 
     public WelcomePageObject(AppiumDriver driver){
@@ -26,6 +27,10 @@ public class WelcomePageObject extends MainPageObject {
 
     public void clickNext(){
         this.waitForElementAndClick(NEXT_BUTTON, "Cannot find and click Next", 5);
+    }
+
+    public void clickSkip(){
+        this.waitForElementAndClick(SKIP_BUTTON, "Cannot find and click Skip", 5);
     }
 
     public void clickGetStartedButton(){

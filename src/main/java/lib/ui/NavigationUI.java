@@ -2,10 +2,11 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-public class NavigationUI extends MainPageObject {
+abstract public class NavigationUI extends MainPageObject {
 
-    private static final String
-        MY_LISTS_LINK = "id:org.wikipedia:id/nav_tab_reading_lists";
+    protected static String
+            MY_LISTS_LINK,
+            OPTION_OUTSIDE;
 
 
     public NavigationUI(AppiumDriver driver) {
@@ -19,4 +20,12 @@ public class NavigationUI extends MainPageObject {
                 5
         );
     }
+
+    public void clickOutside() {
+        waitForElementAndClick(
+                OPTION_OUTSIDE,
+                "Cannon found article",
+                2);
+    }
 }
+
